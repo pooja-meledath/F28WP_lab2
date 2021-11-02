@@ -49,14 +49,13 @@ class Bear {
 
 function setSpeed(){
     bear.dBear = document.getElementById("dBear").value;
-    console.log(bear.dBear);
+    
 }
 
 
 function start() {
     //create bear
     bear = new Bear();
-
     // Add an event listener to the keypress event.
     document.addEventListener("keydown", moveBear, false);
     bees = new Array();
@@ -65,7 +64,7 @@ function start() {
     updateBees();
     //take start time
     lastStingTime = new Date();
-    //lastStingTime = document.addEventListener("keydown", moveBear, true); 
+    document.addEventListener("keydown",function(){lastStingTime = new Date()}); 
 
    }
 
@@ -179,6 +178,7 @@ function createBeeImg(wNum) {//get dimension and position of board div
     //return the img object
     return img;
    }
+
 function getRandomInt(max) {
     return Math.floor(Math.random() * max);
   }
@@ -209,14 +209,17 @@ function moveBees() {
         let dx = getRandomInt(2 * speed) - speed;
         let dy = getRandomInt(2 * speed) - speed;
         bees[i].move(dx, dy);
-        isHit(bees[i], bear); //we add this to count stings
+        //we add this to count stings
+        isHit(bees[i], bear); 
     }
    }
-function updateBees() { // update loop for game
+function updateBees() { 
+    // update loop for game
     //move the bees randomly
     moveBees();
     //use a fixed update period
-    let period = document.getElementById("periodTimer").value;;//modify this to control refresh period
+    //modify this to control refresh period
+    let period = document.getElementById("periodTimer").value;;
     //update the timer for the next move
     updateTimer = setTimeout('updateBees()', period);
     let score = hits.innerHTML;
